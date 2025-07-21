@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="81295246-f855-429d-92c0-8fe4eb62f9ad" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="30AY5dtfLEyszoZlvCu8J1I2Fpv" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;Spring Boot.Homework2Application (1).executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.Homework2Application.executor&quot;: &quot;Coverage&quot;,
+    &quot;Spring Boot.HomeworkApplication.executor&quot;: &quot;Run&quot;,
+    &quot;deletionFromPopupRequiresConfirmation&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\Kì 5\CodeProject\HomeworkExercise\src\main\resources\static\image" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="HomeworkApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="homework" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="sum25.tinth.homework.HomeworkApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.26927.53" />
+        <option value="bundled-js-predefined-d6986cc7102b-09060db00ec0-JavaScript-IU-251.26927.53" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="81295246-f855-429d-92c0-8fe4eb62f9ad" name="Changes" comment="" />
+      <created>1753071662170</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1753071662170</updated>
+      <workItem from="1753071663394" duration="2404000" />
+      <workItem from="1753103067860" duration="892000" />
+      <workItem from="1753103999713" duration="192000" />
+      <workItem from="1753104209811" duration="56000" />
+      <workItem from="1753104308774" duration="821000" />
+      <workItem from="1753105157831" duration="967000" />
+      <workItem from="1753106149299" duration="4000" />
+      <workItem from="1753106159042" duration="4000" />
+      <workItem from="1753106169683" duration="4000" />
+      <workItem from="1753106181630" duration="4000" />
+      <workItem from="1753106193964" duration="7000" />
+      <workItem from="1753106207772" duration="4000" />
+      <workItem from="1753106216808" duration="176000" />
+      <workItem from="1753107121677" duration="79000" />
+      <workItem from="1753107553447" duration="44000" />
+      <workItem from="1753107665613" duration="76000" />
+      <workItem from="1753107776564" duration="84000" />
+      <workItem from="1753107910939" duration="6000" />
+      <workItem from="1753107927804" duration="21000" />
+      <workItem from="1753108011755" duration="56000" />
+      <workItem from="1753108110256" duration="14000" />
+      <workItem from="1753108145708" duration="408000" />
+      <workItem from="1753108702186" duration="1672000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/HomeworkExercise$Homework2Application.ic" NAME="Homework2Application Coverage Results" MODIFIED="1753103939565" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>sum25.tinth.homework.*</FILTER>
+    </SUITE>
+  </component>
+</project>

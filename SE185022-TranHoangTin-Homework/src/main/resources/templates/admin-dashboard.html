@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Orchid Shop</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --green1: #41b883;
+            --green2: #92c472;
+            --green3: #4fb06c;
+            --graybg: #f4f8f2;
+            --header-bg: linear-gradient(90deg, #41b883 0%, #92c472 100%);
+        }
+        body {
+            background: var(--graybg);
+        }
+        .dashboard-header {
+            padding: 36px 0 18px 0;
+            background: var(--header-bg);
+            color: #fff;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 34px;
+            box-shadow: 0 4px 24px 0 rgba(60,70,100,.06);
+        }
+        .dashboard-header h1 {
+            font-size: 2.2rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .dashboard-actions {
+            gap: 14px;
+            margin-bottom: 38px;
+            justify-content: center;
+        }
+        .dashboard-card {
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 2px 12px 0 rgba(70,100,150,.07);
+            padding: 22px 18px 18px 18px;
+            margin-bottom: 30px;
+        }
+        .dashboard-card h3 {
+            font-size: 1.25rem;
+            color: var(--green1);
+            font-weight: bold;
+        }
+        .table th, .table td {
+            vertical-align: middle !important;
+            text-align: center;
+        }
+        .table thead {
+            background: #e7f4ea;
+        }
+        .btn-sm {
+            min-width: 64px;
+        }
+        .dashboard-avatar {
+            border-radius: 50%;
+            border: 2px solid #41b883;
+            object-fit: cover;
+            height: 56px;
+            width: 56px;
+            margin-bottom: 8px;
+        }
+        .btn-success, .btn-success:active, .btn-success:focus {
+            background: var(--green1) !important;
+            border: none;
+        }
+        .btn-success:hover {
+            background: var(--green3) !important;
+        }
+        .btn-primary {
+            background: var(--green2) !important;
+            border: none;
+        }
+        .btn-primary:hover {
+            background: var(--green3) !important;
+        }
+        .btn-info {
+            background: #63cdda !important;
+            border: none;
+            color: #fff;
+        }
+        .btn-info:hover {
+            background: #4daeb5 !important;
+            color: #fff;
+        }
+        .btn-danger {
+            background: #ee5253 !important;
+            border: none;
+        }
+        .btn-danger:hover {
+            background: #c44536 !important;
+        }
+        @media (max-width: 768px) {
+            .dashboard-header { padding: 18px 0 10px 0; }
+            .dashboard-card { padding: 10px 4px 8px 4px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Header -->
+    <div class="dashboard-header text-center mb-4">
+        <img src="https://cdn-icons-png.flaticon.com/512/2909/2909769.png" alt="Orchid" class="dashboard-avatar">
+        <h1>Admin Dashboard</h1>
+        <div class="d-flex dashboard-actions flex-wrap justify-content-center mt-2">
+            <a th:href="@{/admin/create-account-admin}" class="btn btn-success"><i class="fa fa-user-plus me-1"></i>Thêm Account</a>
+            <a th:href="@{/admin/create-orchid-admin}" class="btn btn-primary"><i class="fa fa-plus-circle me-1"></i>Thêm Orchid</a>
+            <a th:href="@{/logout}" class="btn btn-danger"><i class="fa fa-sign-out-alt me-1"></i>Đăng Xuất</a>
+        </div>
+    </div>
+    <!-- Quản Lý Account -->
+    <div class="dashboard-card">
+        <h3 class="mb-3 text-center">Quản Lý Account</h3>
+        <div class="table-responsive">
+            <table class="table table-bordered align-middle text-center">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Tên</th>
+                    <th>Email</th>
+                    <th>Vai Trò</th>
+                    <th>Hành Động</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="account : ${accounts}">
+                    <td th:text="${account.accountId}"></td>
+                    <td th:text="${account.accountName}"></td>
+                    <td th:text="${account.email}"></td>
+                    <td th:text="${account.role.roleName}"></td>
+                    <td>
+                        <a th:href="@{/admin/accounts/edit/{id}(id=${account.accountId})}"
+                           class="btn btn-sm btn-warning" title="Sửa"
+                           onclick="return confirm('Bạn có chắc chắn muốn sửa account này không?')">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                        <a th:href="@{/admin/accounts/delete/{id}(id=${account.accountId})}"
+                           class="btn btn-sm btn-danger" title="Xóa"
+                           onclick="return confirm('Bạn có chắc chắn muốn xóa account này không?')">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- Quản Lý Orchid -->
+    <div class="dashboard-card">
+        <h3 class="mb-3 text-center">Quản Lý Orchid</h3>
+        <div class="table-responsive">
+            <table class="table table-bordered align-middle text-center">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Ảnh</th>
+                    <th>Mô tả</th>
+                    <th>Tên</th>
+                    <th>Giá</th>
+                    <th>Kiểu</th>
+                    <th>Loại</th>
+                    <th>Hành Động</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="orchid : ${orchids}">
+                    <td th:text="${orchid.orchidId}"></td>
+                    <td>
+                        <img th:src="${orchid.orchidUrl}" alt="orchid"
+                             class="img-thumbnail" style="height: 60px; width: 60px; object-fit: cover;">
+                    </td>
+                    <td th:text="${orchid.orchidDescription}"></td>
+                    <td th:text="${orchid.orchidName}"></td>
+                    <td th:text="${orchid.price}"></td>
+                    <td th:text="${orchid.category.categoryName}"></td>
+                    <td th:text="${orchid.isNatural ? 'Tự nhiên' : 'Lai tạo'}"></td>
+                    <td>
+                        <a th:href="@{/admin/orchids/edit/{id}(id=${orchid.orchidId})}"
+                           class="btn btn-sm btn-warning" title="Sửa"
+                           onclick="return confirm('Bạn có chắc chắn muốn sửa orchid này không?')">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                        <a th:href="@{/admin/orchids/delete/{id}(id=${orchid.orchidId})}"
+                           class="btn btn-sm btn-danger" title="Xóa"
+                           onclick="return confirm('Bạn có chắc chắn muốn xóa orchid này không?')">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

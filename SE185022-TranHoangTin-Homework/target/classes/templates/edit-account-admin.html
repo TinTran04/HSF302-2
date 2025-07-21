@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chỉnh Sửa Account</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+    <style>
+        body {
+            background: linear-gradient(135deg, #eafaf1 0%, #f9fafb 100%);
+        }
+        .edit-container {
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 3px 22px 0 rgba(52,160,120,0.11);
+            padding: 38px 34px 26px 34px;
+            margin-top: 45px;
+        }
+        .form-title {
+            font-weight: bold;
+            color: #218b5e;
+            margin-bottom: 16px;
+        }
+        .avatar-big {
+            width: 70px;
+            height: 70px;
+            background: #eafaf1;
+            border-radius: 50%;
+            margin: 0 auto 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.3rem;
+            color: #36c488;
+            box-shadow: 0 2px 12px 0 #d0f5e2;
+        }
+        .form-label {
+            font-weight: 500;
+            color: #278048;
+        }
+        .btn-success, .btn-success:focus, .btn-success:active {
+            background: #30c57b !important;
+            border: none;
+        }
+        .btn-secondary {
+            border-radius: 8px;
+        }
+        .form-control:focus {
+            border-color: #50e7b1;
+            box-shadow: 0 0 0 0.2rem rgba(80,231,177,.13);
+        }
+        @media (max-width: 576px) {
+            .edit-container { padding: 18px 8px 12px 8px;}
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-12">
+            <div class="edit-container mt-4">
+                <div class="avatar-big">
+                    <i class="fas fa-user-edit"></i>
+                </div>
+                <h2 class="form-title text-center">Chỉnh Sửa Tài Khoản</h2>
+                <form th:action="@{/admin/accounts/update/{id}(id=${editAccount.accountId})}" method="post" th:object="${editAccount}" autocomplete="off">
+                    <div class="mb-3">
+                        <label for="accountName" class="form-label">Tên Account</label>
+                        <input type="text" class="form-control"
+                               th:field="*{accountName}" id="accountName"
+                               placeholder="Nhập tên" required>
+                        <div class="text-danger" th:if="${#fields.hasErrors('accountName')}" th:errors="*{accountName}"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control"
+                               th:field="*{email}" id="email"
+                               placeholder="Nhập email" required>
+                        <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Mật Khẩu</label>
+                        <input type="password" class="form-control"
+                               th:field="*{password}" id="password"
+                               placeholder="Nhập mật khẩu mới hoặc giữ nguyên" required>
+                        <div class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="role" class="form-label">Vai Trò</label>
+                        <select class="form-control" id="role" th:field="*{role}" required>
+                            <option value="" disabled>Chọn vai trò</option>
+                            <option th:each="role : ${roles}"
+                                    th:value="${role.roleId}"
+                                    th:text="${role.roleName}"></option>
+                        </select>
+                        <div class="text-danger" th:if="${#fields.hasErrors('role')}" th:errors="*{role}"></div>
+                    </div>
+                    <div class="d-flex justify-content-center gap-2 mt-4 mb-3 flex-wrap">
+                        <button type="submit" class="btn btn-success btn-lg px-4">
+                            <i class="fas fa-save me-2"></i> Lưu Thay Đổi
+                        </button>
+                        <a th:href="@{/admin/dashboard}" class="btn btn-secondary btn-lg px-4">
+                            <i class="fas fa-times"></i> Hủy
+                        </a>
+
+                    </div>
+                </form>
+                <div th:if="${error}" class="alert alert-danger text-center mt-3" role="alert">
+                    <span th:text="${error}"></span>
+                </div>
+                <div th:if="${success}" class="alert alert-success text-center mt-3" role="alert">
+                    <span th:text="${success}"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

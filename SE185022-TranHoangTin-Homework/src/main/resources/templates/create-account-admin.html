@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thêm Account Mới</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(120deg, #e6f7ff 60%, #f5fded 100%);
+            min-height: 100vh;
+        }
+        .add-header {
+            background: #d4e8fd;
+            padding: 28px 0 12px 0;
+            border-radius: 18px 18px 0 0;
+            text-align: center;
+        }
+        .add-header i {
+            font-size: 2.2rem;
+            color: #3386b1;
+            margin-bottom: 8px;
+        }
+        .form-container {
+            max-width: 470px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 0 0 18px 18px;
+            box-shadow: 0 2px 16px 0 rgba(80,120,180,.12);
+            padding: 36px 36px 28px 36px;
+        }
+        .form-label {
+            font-weight: 500;
+            color: #256399;
+        }
+        .btn-success {
+            background-color: #3386b1 !important;
+            border: none;
+            font-weight: 500;
+            padding-left: 26px;
+            padding-right: 26px;
+        }
+        .btn-success:hover {
+            background-color: #22577a !important;
+        }
+        .dashboard-link {
+            margin-top: 10px;
+            display: inline-block;
+        }
+        .alert {
+            margin-top: 18px;
+        }
+    </style>
+</head>
+<body>
+<div class="add-header">
+    <i class="fas fa-user-plus"></i>
+    <h1 class="mb-0">Thêm Account Mới</h1>
+</div>
+<div class="form-container">
+    <form th:action="@{/admin/accounts/create}" method="post" th:object="${newAccount}">
+        <div class="mb-3">
+            <label for="accountName" class="form-label">Tên Account</label>
+            <input type="text" class="form-control" id="accountName" name="accountName"
+                   th:field="*{accountName}" placeholder="Nhập tên" required>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email"
+                   th:field="*{email}" placeholder="Nhập email" required>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Mật Khẩu</label>
+            <input type="password" class="form-control" id="password" name="password"
+                   th:field="*{password}" placeholder="Nhập mật khẩu" required>
+        </div>
+        <div class="mb-3">
+            <label for="role" class="form-label">Vai Trò</label>
+            <select class="form-control" id="role" th:field="*{role}" required>
+                <option value="" selected disabled>Chọn vai trò</option>
+                <option th:each="role : ${roles}"
+                        th:value="${role.roleId}"
+                        th:text="${role.roleName}">
+                </option>
+            </select>
+        </div>
+        <div class="d-grid mb-2 mt-4">
+            <button type="submit" class="btn btn-success btn-lg">
+                <i class="fas fa-plus me-2"></i> Thêm Account
+            </button>
+        </div>
+    </form>
+
+    <div class="text-center dashboard-link">
+        <a th:href="@{/admin/dashboard}" class="btn btn-outline-success">
+            <i class="fas fa-arrow-left"></i> Về Dashboard
+        </a>
+    </div>
+
+    <div th:if="${error}" class="alert alert-danger text-center" role="alert">
+        <span th:text="${error}"></span>
+    </div>
+    <div th:if="${success}" class="alert alert-success text-center" role="alert">
+        <span th:text="${success}"></span>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

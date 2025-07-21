@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Trang chủ - Orchid Shop</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --main-green: #41b883;
+            --main-light: #e8f9f3;
+            --main-gray: #f8f9fa;
+            --accent-green: #76c893;
+            --main-text: #2d4739;
+            --card-border: #d2e3dd;
+        }
+        body {
+            background: var(--main-gray);
+            color: var(--main-text);
+        }
+        .navbar {
+            background: linear-gradient(90deg, var(--main-green), var(--accent-green));
+            box-shadow: 0 2px 8px rgba(64, 100, 70, 0.06);
+        }
+        .navbar-brand, .navbar-nav .nav-link {
+            color: #fff !important;
+            font-weight: 600;
+        }
+        .navbar-brand i {
+            color: #fff04d;
+        }
+        /* New Hero */
+        .hero-section {
+            position: relative;
+            border-radius: 22px;
+            overflow: hidden;
+            margin-top: 28px;
+            background: linear-gradient(80deg, #d7f9e6 60%, #c9e8ff 100%);
+            box-shadow: 0 4px 20px 0 rgba(70,150,90,.10);
+        }
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: url('https://img.freepik.com/free-photo/beautiful-orchid-flower_23-2150751997.jpg') center right/cover no-repeat;
+            opacity: 0.27;
+            z-index: 0;
+        }
+        .hero-content2 {
+            position: relative;
+            z-index: 2;
+            padding: 56px 48px 46px 36px;
+            min-height: 320px;
+        }
+        .hero-headline {
+            color: #27624f;
+            font-weight: 800;
+            font-size: 2.5rem;
+            letter-spacing: 1.2px;
+            text-shadow: 0 3px 16px #f0fffb;
+            margin-bottom: 16px;
+        }
+        .hero-highlight {
+            color: #219973;
+            font-weight: 700;
+            background: #e2f8ec;
+            border-radius: 8px;
+            padding: 4px 14px;
+            display: inline-block;
+            margin-bottom: 8px;
+            font-size: 1.12rem;
+        }
+        .hero-desc2 {
+            font-size: 1.17rem;
+            color: #3a6757;
+            margin-bottom: 28px;
+            font-weight: 500;
+        }
+        .hero-action {
+            background: linear-gradient(90deg, #41b883, #6be4b8 90%);
+            color: #fff;
+            border: none;
+            font-weight: 600;
+            border-radius: 26px;
+            padding: 0.9rem 2.4rem;
+            font-size: 1.08rem;
+            box-shadow: 0 3px 14px 0 #c6eedd99;
+            transition: background 0.2s, box-shadow .2s;
+        }
+        .hero-action:hover {
+            background: #1e956b;
+            color: #fff;
+            box-shadow: 0 8px 24px 0 #aadfcccc;
+        }
+        @media (max-width: 991px) {
+            .hero-content2 { padding: 36px 16px 30px 16px; min-height: 220px;}
+            .hero-headline {font-size: 1.35rem;}
+        }
+        /* Product card */
+        .product-card {
+            background: #fff;
+            border-radius: 18px;
+            border: 1.5px solid var(--card-border);
+            box-shadow: 0 4px 14px 0 rgba(60,80,80,.10);
+            transition: box-shadow .2s, transform .2s;
+            border: none;
+        }
+        .product-card:hover {
+            box-shadow: 0 8px 32px 0 rgba(60,70,100,.15);
+            transform: translateY(-4px) scale(1.03);
+        }
+        .card-title {
+            color: var(--main-green);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        .badge.bg-secondary {
+            background: var(--accent-green) !important;
+            color: #fff;
+            font-weight: 400;
+        }
+        .btn-success, .btn-success:active, .btn-success:focus {
+            background: var(--main-green) !important;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center gap-2" th:href="@{/}">
+            <i class="fas fa-seedling"></i> Orchid Shop
+        </a>
+        <div class="navbar-nav ms-auto align-items-center gap-2">
+            <form class="d-flex me-2" th:action="@{/search}" method="get">
+                <input class="form-control me-1" type="search" name="keyword" placeholder="Tìm kiếm lan...">
+                <button class="btn btn-light" type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+            <a class="nav-link" th:href="@{/cart}">
+                <i class="fas fa-shopping-cart"></i> Giỏ hàng
+            </a>
+            <div class="nav-item" th:if="${session.account == null}">
+                <a class="nav-link" th:href="@{/login}">Đăng nhập</a>
+            </div>
+            <div class="nav-item" th:if="${session.account != null}">
+                <span class="nav-link" th:text="${session.account.accountName}"></span>
+            </div>
+            <div class="nav-item" th:if="${session.account != null}">
+                <a class="nav-link" th:href="@{/logout}">Đăng xuất</a>
+            </div>
+        </div>
+    </div>
+</nav>
+<div th:fragment="content">
+    <!-- Hero Section -->
+    <section class="hero-section mb-5">
+        <div class="hero-bg"></div>
+        <div class="container hero-content2">
+            <span class="hero-highlight"><i class="fas fa-crown"></i> Sản phẩm thiên nhiên - Chất lượng Orchid Shop</span>
+            <h1 class="hero-headline">Vẻ đẹp thanh lịch, <span style="color:#1e956b;">khơi nguồn cảm hứng</span></h1>
+            <div class="hero-desc2">
+                Tận hưởng bộ sưu tập lan đa sắc, nhập khẩu chính hãng. <br>
+                Phù hợp trang trí nhà cửa, biếu tặng sang trọng.<br>
+                <span style="color:#209a6b;font-weight:600;">Giao tận nơi - Đổi trả linh hoạt!</span>
+            </div>
+            <a href="#products" class="hero-action shadow-sm"><i class="fas fa-arrow-down"></i> Khám phá ngay</a>
+        </div>
+    </section>
+    <!-- Featured Products -->
+    <section class="py-5 bg-light" id="products">
+        <div class="container">
+            <h2 class="text-center mb-5" style="color:var(--main-green);font-weight:700;">Sản phẩm nổi bật</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4" th:each="orchid : ${orchids}">
+                    <div class="card h-100 product-card">
+                        <img th:src="${orchid.orchidUrl}" class="card-img-top" alt="Orchid Image"
+                             style="height: 210px; object-fit: cover;">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title" th:text="${orchid.orchidName}">Orchid Name</h5>
+                            <p class="card-text text-muted small mb-2" th:text="${orchid.category.categoryName}">Category</p>
+                            <p class="card-text flex-grow-1" th:text="${#strings.abbreviate(orchid.orchidDescription, 70)}">Description</p>
+                            <div class="mt-auto">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="h5 text-success" th:text="${#numbers.formatCurrency(orchid.price)}">Price</span>
+                                    <span class="badge bg-secondary" th:if="${orchid.isNatural}">Tự nhiên</span>
+                                </div>
+                                <form th:action="@{/add-to-cart}" method="post" class="d-flex align-items-center mt-2">
+                                    <input type="hidden" name="orchidId" th:value="${orchid.orchidId}"/>
+                                    <input type="number" name="quantity" value="1" min="1" class="form-control me-2" style="width: 72px;"/>
+                                    <button type="submit" class="btn btn-success btn-sm">
+                                        <i class="fas fa-shopping-cart"></i> Thêm
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Pagination -->
+            <nav th:if="${totalPages > 1}">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
+                        <a class="page-link" th:href="@{/(page=${currentPage - 1})}">Trước</a>
+                    </li>
+                    <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
+                        th:classappend="${i == currentPage} ? 'active'">
+                        <a class="page-link" th:href="@{/(page=${i})}" th:text="${i + 1}">1</a>
+                    </li>
+                    <li class="page-item" th:classappend="${currentPage == totalPages - 1} ? 'disabled'">
+                        <a class="page-link" th:href="@{/(page=${currentPage + 1})}">Sau</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </section>
+</div>
+</body>
+</html>

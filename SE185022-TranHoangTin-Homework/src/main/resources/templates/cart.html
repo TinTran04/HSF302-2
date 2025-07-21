@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Giỏ hàng - Orchid Shop</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --main-green: #41b883;
+            --accent-green: #76c893;
+            --gray-bg: #f4f8f2;
+            --card-border: #e6ede7;
+            --main-text: #24482f;
+        }
+        body {
+            background: var(--gray-bg);
+            color: var(--main-text);
+        }
+        .navbar {
+            background: linear-gradient(90deg, var(--main-green), var(--accent-green));
+            box-shadow: 0 2px 8px rgba(64, 100, 70, 0.07);
+        }
+        .navbar-brand, .navbar-nav .nav-link {
+            color: #fff !important;
+            font-weight: 600;
+        }
+        .cart-card {
+            background: #fff;
+            border-radius: 18px;
+            border: 1.5px solid var(--card-border);
+            box-shadow: 0 2px 12px 0 rgba(80,110,90,.09);
+            transition: box-shadow .2s, transform .2s;
+            border: none;
+        }
+        .cart-card:hover {
+            box-shadow: 0 8px 32px 0 rgba(60,70,100,.13);
+            transform: translateY(-2px) scale(1.01);
+        }
+        .card-title {
+            color: var(--main-green);
+            font-weight: 600;
+            font-size: 1.08rem;
+        }
+        .btn-success, .btn-success:active, .btn-success:focus {
+            background: var(--main-green) !important;
+            border: none;
+        }
+        .btn-danger {
+            font-weight: 500;
+            letter-spacing: .5px;
+        }
+        .cart-total-box {
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 2px 12px 0 rgba(80,110,90,.07);
+            border: 1.5px solid var(--card-border);
+            max-width: 360px;
+            margin: auto;
+            padding: 24px 28px;
+        }
+        @media (max-width: 991px) {
+            .cart-total-box { max-width: 100%; padding: 20px 10px;}
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand" th:href="@{/}"><i class="fas fa-seedling"></i> Orchid Shop</a>
+        <div class="navbar-nav ms-auto">
+            <a class="nav-link" th:href="@{/}">Trang chủ</a>
+            <a class="nav-link active" th:href="@{/cart}">Giỏ hàng</a>
+        </div>
+    </div>
+</nav>
+<div class="container py-5">
+    <h2 class="mb-4 text-center" style="color:var(--main-green); font-weight:700;">Giỏ hàng của bạn</h2>
+    <!-- Empty Cart -->
+    <div th:if="${cartItems == null or #lists.isEmpty(cartItems)}" class="text-center">
+        <img src="https://cdn-icons-png.flaticon.com/512/2038/2038854.png" width="96" class="mb-3" alt="Empty cart">
+        <p class="fs-5 mb-4">Giỏ hàng trống.</p>
+        <a class="btn btn-success" th:href="@{/}"><i class="fas fa-arrow-left"></i> Quay lại mua hàng</a>
+    </div>
+    <!-- Cart Items -->
+    <div class="row justify-content-center" th:if="${cartItems != null and !#lists.isEmpty(cartItems)}">
+        <div class="col-lg-4 col-md-6 mb-4" th:each="item : ${cartItems}">
+            <div class="card h-100 cart-card d-flex flex-column">
+                <img th:src="${item.orchid.getOrchidUrl()}" class="card-img-top" alt="Orchid Image"
+                     style="height: 180px; object-fit: cover;">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title" th:text="${item.orchid.orchidName}">Orchid Name</h5>
+                    <p class="card-text text-muted small mb-1"
+                       th:if="${item.orchid.category != null}"
+                       th:text="${item.orchid.category.categoryName}"></p>
+                    <p class="card-text text-muted small mb-1"
+                       th:unless="${item.orchid.category != null}">
+                        No category
+                    </p>
+                    <p class="card-text mb-1">Số lượng: <b th:text="${item.quantity}"></b></p>
+                    <span class="h6 text-success" th:text="${item.orchid.price}">Price</span>
+                    <form th:action="@{/cart/remove}" method="post" class="mt-3">
+                        <input type="hidden" name="orchidId" th:value="${item.orchid.orchidId}"/>
+                        <button type="submit" class="btn btn-danger btn-sm w-100">
+                            <i class="fas fa-trash"></i> Xóa
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Cart Total -->
+    <div th:if="${cartItems != null and !#lists.isEmpty(cartItems)}" class="mt-4">
+        <div class="cart-total-box text-center">
+            <h4 style="color:var(--main-green);font-weight:600;">Tổng tiền</h4>
+            <span class="fs-4 fw-bold" style="color:#35976d;" th:text="${totalPrice}">0</span>
+            <div class="mt-3">
+                <a class="btn btn-success btn-lg px-5" th:href="@{/checkout}">
+                    <i class="fas fa-credit-card"></i> Thanh toán
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thêm Lan Mới</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(120deg, #e3f7e8 70%, #d0f0d9 100%);
+            min-height: 100vh;
+        }
+        .add-header {
+            background: #b7e4c7;
+            padding: 28px 0 14px 0;
+            border-radius: 20px 20px 0 0;
+            text-align: center;
+        }
+        .add-header i {
+            font-size: 2.1rem;
+            color: #43b06c;
+            margin-bottom: 10px;
+        }
+        .form-container {
+            max-width: 470px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 2px 20px 0 rgba(68,100,90,.13);
+            padding: 36px 36px 28px 36px;
+        }
+        .form-label {
+            font-weight: 500;
+            color: #33826b;
+        }
+        .btn-success {
+            background-color: #41b883 !important;
+            border: none;
+            font-weight: 500;
+            padding-left: 28px;
+            padding-right: 28px;
+        }
+        .btn-success:hover {
+            background-color: #399966 !important;
+        }
+        .dashboard-link {
+            margin-top: 10px;
+            display: inline-block;
+        }
+        .alert {
+            margin-top: 18px;
+        }
+    </style>
+</head>
+<body>
+<div class="add-header">
+    <i class="fas fa-spa"></i>
+    <h1 class="mb-0">Thêm Lan Mới</h1>
+</div>
+<div class="form-container">
+    <form th:action="@{/admin/orchids/create}" method="post" th:object="${newOrchid}">
+        <div class="mb-3">
+            <label for="orchidName" class="form-label">Tên Lan</label>
+            <input type="text" class="form-control" id="orchidName" th:field="*{orchidName}"
+                   placeholder="Nhập tên lan" required>
+        </div>
+        <div class="mb-3">
+            <label for="orchidDescription" class="form-label">Mô Tả</label>
+            <textarea class="form-control" id="orchidDescription" th:field="*{orchidDescription}"
+                      rows="3" placeholder="Nhập mô tả lan" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="price" class="form-label">Giá</label>
+            <input type="number" min="0" class="form-control" id="price" th:field="*{price}"
+                   placeholder="Nhập giá" step="1" required>
+        </div>
+        <div class="mb-3">
+            <label for="orchidUrl" class="form-label">URL Hình Ảnh</label>
+            <input type="url" class="form-control" id="orchidUrl" th:field="*{orchidUrl}"
+                   placeholder="Nhập URL hình ảnh">
+        </div>
+        <div class="mb-3">
+            <label for="category" class="form-label">Danh Mục</label>
+            <select class="form-control" id="category" th:field="*{category}" required>
+                <option value="" selected disabled>Chọn danh mục</option>
+                <option th:each="cat : ${categories}"
+                        th:value="${cat.categoryId}"
+                        th:text="${cat.categoryName}">
+                </option>
+            </select>
+        </div>
+        <div class="mb-4">
+            <label for="isNatural" class="form-label">Loại Lan</label>
+            <select class="form-control" id="isNatural" th:field="*{isNatural}" required>
+                <option value="true">Lan tự nhiên</option>
+                <option value="false">Lan lai tạo</option>
+            </select>
+        </div>
+        <div class="d-grid mb-2">
+            <button type="submit" class="btn btn-success btn-lg">
+                <i class="fas fa-plus me-2"></i> Thêm Lan
+            </button>
+        </div>
+    </form>
+
+    <div class="text-center dashboard-link">
+        <a th:href="@{/admin/dashboard}" class="btn btn-outline-success">
+            <i class="fas fa-arrow-left"></i> Về Dashboard
+        </a>
+    </div>
+
+    <div th:if="${error}" class="alert alert-danger text-center" role="alert">
+        <span th:text="${error}"></span>
+    </div>
+    <div th:if="${success}" class="alert alert-success text-center" role="alert">
+        <span th:text="${success}"></span>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
